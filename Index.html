@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Letterbox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdf8ed;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+        }
+
+        .letterbox {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #e74c3c;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 1s ease-in-out;
+            z-index: 2;
+        }
+
+        .letterbox p {
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            font-family: 'Cursive', sans-serif;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: black;
+        }
+
+        .letter {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            background-color: #ffebeb;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            transition: transform 1s ease-in-out, height 1s ease-in-out;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .letter h2 {
+            font-size: 1.5em;
+            color: #c0392b;
+            margin-bottom: 20px;
+            font-family: 'Cursive', sans-serif;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        .yes-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .no-btn {
+            background-color: white;
+            border: 2px solid #e74c3c;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="letterbox" onclick="openLetter()">
+            <p>For my babe</p>
+            <div class="stamp">💮</div>
+        </div>
+
+        <div class="letter" id="letter">
+            <h2>Will you be my valentine?</h2>
+            <button class="btn yes-btn" onclick="window.location.href='yes.html'">Yes</button>
+            <button class="btn no-btn" onclick="addYesButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+        function openLetter() {
+            const letterbox = document.querySelector('.letterbox');
+            const letter = document.getElementById('letter');
+
+            letterbox.style.transform = "translateY(150vh)";
+            setTimeout(() => {
+                letterbox.style.display = "none";
+                letter.style.transform = "translateY(-50px)";
+                letter.style.height = "350px"; 
+            }, 1000);
+        }
+
+        function addYesButton() {
+            const letter = document.getElementById('letter');
+            for (let i = 0; i < 2; i++) { 
+                const yesBtn = document.createElement('button');
+                yesBtn.textContent = "Yes";
+                yesBtn.className = "btn yes-btn";
+                yesBtn.style.position = "absolute";
+                yesBtn.style.left = Math.random() * 70 + "%";
+                yesBtn.style.top = Math.random() * 70 + "%";
+                yesBtn.onclick = () => window.location.href = 'yes.html';
+                letter.appendChild(yesBtn);
+            }
+        }
+    </script>
+
+</body>
+</html>
